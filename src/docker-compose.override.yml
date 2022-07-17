@@ -23,7 +23,7 @@ services:
       - POSTGRES_DB=DiscountDb
     restart: always
     ports:
-        - "5432:5432"
+      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data/
      
@@ -34,8 +34,14 @@ services:
         ACCEPT_EULA: "Y"
     restart: always
     ports:
-        - "1433:1433"
+      - "1433:1433"
     
+  rabbitmq:
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
   pgadmin:
     container_name: pgadmin
     environment:
@@ -43,7 +49,7 @@ services:
       - PGADMIN_DEFAULT_PASSWORD=admin1234
     restart: always
     ports:
-        - "5050:80"
+      - "5050:80"
     volumes:
       - pgadmin_data:/root/.pgadmin    
       
@@ -84,7 +90,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - "DatabaseSettings:ConnectionString=Server=discountdb;Port=5432;Database=DiscountDb;User Id=admin;Password=admin1234;"
     depends_on:
-    - discountdb
+      - discountdb
     ports:
       - "8002:80"
   discount.grpc:
@@ -93,7 +99,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - "DatabaseSettings:ConnectionString=Server=discountdb;Port=5432;Database=DiscountDb;User Id=admin;Password=admin1234;"
     depends_on:
-    - discountdb
+      - discountdb
     ports:
       - "8003:80"
   ordering.ai:
