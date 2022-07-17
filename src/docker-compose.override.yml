@@ -96,3 +96,12 @@ services:
     - discountdb
     ports:
       - "8003:80"
+  ordering.ai:
+    container_name: ordering.ai
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:OrderingConnectionString=Server=orderdb;Database=OrderDb;User Id=sa;Password=SwN12345678;"
+    depends_on:
+      - orderdb
+    ports:
+      - "8004:80"
