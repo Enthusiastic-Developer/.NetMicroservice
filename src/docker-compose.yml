@@ -38,9 +38,16 @@ services:
       context: .
       dockerfile: Services/Discount/Discount.Grpc/Dockerfile
 
+  ordering.ai:
+    image: ${DOCKER_REGISTRY-}orderingai
+    build:
+      context: .
+      dockerfile: Services/Ordering/Ordering.AI/Dockerfile
+
 volumes:
   mongo_data:
   portainer_data:
   postgres_data:
   pgadmin_data:
+
 
